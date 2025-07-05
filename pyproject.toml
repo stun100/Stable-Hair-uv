@@ -1,0 +1,49 @@
+[project]
+name = "stable-hair-uv"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate==1.0.1",
+    "einops==0.4.1",
+    "gradio==3.43.1",
+    "huggingface-hub==0.25.2",
+    "omegaconf==2.3.0",
+    "opencv-python>=4.11.0.86",
+    "safetensors==0.4.3",
+    "transformers==4.45.2",
+]
+
+[project.optional-dependencies]
+cpu = [
+  "torch>=2.7.0",
+]
+cu118 = [
+  "torch>=2.7.0",
+]
+
+[tool.uv]
+conflicts = [
+  [
+    { extra = "cpu" },
+    { extra = "cu118" },
+  ],
+]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", extra = "cpu" },
+  { index = "pytorch-cu118", extra = "cu118" },
+]
+
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
